@@ -29,11 +29,13 @@
 
         <ImageView
             android:id="@+id/uploadIcon"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
             android:src="@drawable/ic_add"
-            app:tint="#333333" />
+            android:background="@android:color/transparent"
+            android:contentDescription="Upload Icon" />
     </FrameLayout>
 
     <TextView

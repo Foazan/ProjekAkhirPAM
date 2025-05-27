@@ -90,8 +90,8 @@ public class SubmitActivity extends AppCompatActivity {
 
     private void saveToDatabase(String imageUrl, String fileName) {
         String uid = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : "anonymous";
-        String title = inputTitle.getText().toString();
-        String desc = inputDesc.getText().toString();
+        String title = inputTitle.getText().toString().trim();
+        String desc = inputDesc.getText().toString().trim();
         String rawTags = inputTags.getText().toString();
         boolean isAI = checkboxAi.isChecked();
 
@@ -108,9 +108,10 @@ public class SubmitActivity extends AppCompatActivity {
                 formattedTags.append("#").append(tag).append(" ");
             }
         }
-        String finalTags = formattedTags.toString().trim();
 
+        String finalTags = formattedTags.toString().trim();
         String key = databaseRef.push().getKey();
+
         Map<String, Object> data = new HashMap<>();
         data.put("key", key);
         data.put("uid", uid);
@@ -124,9 +125,8 @@ public class SubmitActivity extends AppCompatActivity {
         databaseRef.child(key).setValue(data)
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(this, "Berhasil disubmit!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SubmitActivity.this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+                    startActivity(new Intent(SubmitActivity.this, MainActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
                     finish();
                 })
                 .addOnFailureListener(e ->
@@ -140,7 +140,6 @@ public class SubmitActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.nav_add).setOnClickListener(v -> {
-
         });
 
         findViewById(R.id.nav_profile).setOnClickListener(v -> {

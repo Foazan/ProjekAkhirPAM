@@ -23,6 +23,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +37,7 @@ import java.io.OutputStream;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private ImageView detailImage, downloadButton;
+    private ImageView detailImage, downloadButton, uploaderProfilePic;
     private TextView detailUploader, detailAI, detailTags, detailDesc;
     private Button deleteButton;
 
@@ -46,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
 
         detailImage = findViewById(R.id.detailImage);
+        uploaderProfilePic = findViewById(R.id.detailProfileImage);
         detailUploader = findViewById(R.id.detailUploader);
         detailAI = findViewById(R.id.detailAI);
         detailTags = findViewById(R.id.detailTags);
@@ -68,17 +70,25 @@ public class DetailActivity extends AppCompatActivity {
 
         if (uploaderUid != null) {
             DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
-            usersRef.child(uploaderUid).child("displayName")
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            String displayName = snapshot.getValue(String.class);
-                            detailUploader.setText(displayName != null ? displayName : "Unknown");
-                        }
+            usersRef.child(uploaderUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    String displayName = snapshot.child("displayName").getValue(String.class);
+                    String profilePicUrl = snapshot.child("profilePicUrl").getValue(String.class);
 
-                        @Override public void onCancelled(@NonNull DatabaseError error) {
-                            detailUploader.setText("Unknown");
-                        }
-                    });
+                    detailUploader.setText(displayName != null ? displayName : "Unknown");
+
+                    if (profilePicUrl != null) {
+                        Glide.with(DetailActivity.this)
+                                .load(profilePicUrl)
+                                .apply(RequestOptions.circleCropTransform())
+                                .into(uploaderProfilePic);
+                    }
+                }
+
+                @Override public void onCancelled(@NonNull DatabaseError error) {
+                    detailUploader.setText("Unknown");
+                }
+            });
         }
 
         String currentUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
