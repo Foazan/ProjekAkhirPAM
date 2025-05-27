@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "448375374755",
+    "project_id": "onlyart-e7a3f",
+    "storage_bucket": "onlyart-e7a3f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:448375374755:android:fefb9d758efa159338d016",
+        "android_client_info": {
+          "package_name": "com.example.onlyart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGFgeuykuv1Ee7T-ZRw05b_mIxv0dZUm0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
