@@ -36,7 +36,6 @@ public class SubmitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_submit);
 
-        // Inisialisasi view
         uploadIcon = findViewById(R.id.uploadIcon);
         inputTitle = findViewById(R.id.inputTitle);
         inputDesc = findViewById(R.id.inputDesc);
@@ -45,16 +44,13 @@ public class SubmitActivity extends AppCompatActivity {
         submitButton = findViewById(R.id.submitButton);
         FrameLayout uploadContainer = findViewById(R.id.uploadContainer);
 
-        // Firebase
         storage = FirebaseStorage.getInstance();
         storageRef = storage.getReference("uploads");
         databaseRef = FirebaseDatabase.getInstance().getReference("works");
         mAuth = FirebaseAuth.getInstance();
 
-        // Klik area upload gambar
         uploadContainer.setOnClickListener(view -> openImageChooser());
 
-        // Submit
         submitButton.setOnClickListener(view -> {
             if (selectedImageUri != null) {
                 uploadData(selectedImageUri);
@@ -87,12 +83,12 @@ public class SubmitActivity extends AppCompatActivity {
 
         imageRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> imageRef.getDownloadUrl()
-                        .addOnSuccessListener(uri -> saveToDatabase(uri.toString())))
+                        .addOnSuccessListener(uri -> saveToDatabase(uri.toString(), fileName)))
                 .addOnFailureListener(e ->
                         Toast.makeText(this, "Gagal upload gambar: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
-    private void saveToDatabase(String imageUrl) {
+    private void saveToDatabase(String imageUrl, String fileName) {
         String uid = mAuth.getCurrentUser() != null ? mAuth.getCurrentUser().getUid() : "anonymous";
         String title = inputTitle.getText().toString();
         String desc = inputDesc.getText().toString();
@@ -116,12 +112,14 @@ public class SubmitActivity extends AppCompatActivity {
 
         String key = databaseRef.push().getKey();
         Map<String, Object> data = new HashMap<>();
+        data.put("key", key);
         data.put("uid", uid);
         data.put("title", title);
         data.put("desc", desc);
         data.put("tags", finalTags);
         data.put("ai_generated", isAI);
         data.put("imageUrl", imageUrl);
+        data.put("imagePath", fileName);
 
         databaseRef.child(key).setValue(data)
                 .addOnSuccessListener(unused -> {

@@ -37,7 +37,6 @@ public class LoginActivity extends AppCompatActivity {
         loginTab = findViewById(R.id.loginTab);
         signinTab = findViewById(R.id.signinTab);
 
-        // Set tampilan awal
         displayNameField.setVisibility(View.GONE);
 
         authToggle.setOnCheckedChangeListener((group, checkedId) -> {

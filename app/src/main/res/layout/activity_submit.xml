@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- AppBar -->
     <TextView
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
@@ -18,7 +17,6 @@
         android:textSize="20sp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Upload Box -->
     <FrameLayout
         android:id="@+id/uploadContainer"
         android:layout_width="160dp"
@@ -38,7 +36,6 @@
             app:tint="#333333" />
     </FrameLayout>
 
-    <!-- Title -->
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
@@ -64,7 +61,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Description -->
     <TextView
         android:id="@+id/descLabel"
         android:layout_width="0dp"
@@ -90,7 +86,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Tags -->
     <TextView
         android:id="@+id/tagLabel"
         android:layout_width="0dp"
@@ -116,7 +111,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="32dp" />
 
-    <!-- Checkbox AI -->
     <CheckBox
         android:id="@+id/checkboxAi"
         android:layout_width="wrap_content"
@@ -126,7 +120,6 @@
         app:layout_constraintTop_toBottomOf="@id/inputTags"
         app:layout_constraintStart_toStartOf="@id/inputTags" />
 
-    <!-- Submit Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/submitButton"
         android:layout_width="0dp"
@@ -139,7 +132,6 @@
         app:layout_constraintStart_toStartOf="@id/inputTags"
         app:layout_constraintEnd_toEndOf="@id/inputTags" />
 
-    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"

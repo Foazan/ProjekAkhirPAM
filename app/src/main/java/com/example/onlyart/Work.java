@@ -6,6 +6,8 @@ public class Work {
     public  String desc;
     public  String uid;
     public  String title;
+    public String key;
+    public String imagePath;
     public  boolean ai_generated;
 
     public Work() {}
@@ -38,6 +40,14 @@ public class Work {
 
     public String getTitle(){
         return title;
+    }
+
+    public String getKey(){
+        return key;
+    }
+
+    public String getImagePath(){
+        return imagePath;
     }
 
     public boolean getAiGenerated(){

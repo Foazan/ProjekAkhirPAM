@@ -7,7 +7,6 @@
     android:background="@drawable/bg_gradient"
     tools:context=".LoginActivity">
 
-    <!-- Title -->
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -21,7 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Subtitle -->
     <TextView
         android:id="@+id/subtitleText"
         android:layout_width="wrap_content"
@@ -34,7 +32,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Toggle Tab: Log in / Sign in -->
     <RadioGroup
         android:id="@+id/authToggle"
         android:layout_width="0dp"
@@ -73,7 +70,6 @@
             android:textColor="@color/tab_text_selector" />
     </RadioGroup>
 
-    <!-- Username -->
     <EditText
         android:id="@+id/usernameField"
         android:layout_width="0dp"
@@ -88,7 +84,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintWidth_percent="0.8" />
 
-    <!-- Password -->
     <EditText
         android:id="@+id/passwordField"
         android:layout_width="0dp"
@@ -119,7 +114,6 @@
         app:layout_constraintTop_toBottomOf="@id/passwordField"
         app:layout_constraintWidth_percent="0.8" />
 
-    <!-- Login Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginButton"
         android:layout_width="0dp"

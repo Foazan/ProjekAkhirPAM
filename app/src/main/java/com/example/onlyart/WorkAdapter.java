@@ -40,6 +40,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
             intent.putExtra("tags", work.getTags());
             intent.putExtra("desc", work.getDesc());
             intent.putExtra("ai_generated", work.getAiGenerated());
+            intent.putExtra("key", work.getKey());
+            intent.putExtra("imagePath", work.getImagePath());
             view.getContext().startActivity(intent);
         });
     }
