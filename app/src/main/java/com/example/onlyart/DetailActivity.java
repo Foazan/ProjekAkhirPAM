@@ -58,9 +58,9 @@ public class DetailActivity extends AppCompatActivity {
         String imageUrl = getIntent().getStringExtra("imageUrl");
         String tags = getIntent().getStringExtra("tags");
         String desc = getIntent().getStringExtra("desc");
-        String uploaderUid = getIntent().getStringExtra("uploaderUid");
         String imagePath = getIntent().getStringExtra("imagePath");
         String key = getIntent().getStringExtra("key");
+        String uploaderUid = getIntent().getStringExtra("uploaderUid");
         boolean aiGenerated = getIntent().getBooleanExtra("ai_generated", false);
 
         Glide.with(this).load(imageUrl).into(detailImage);
@@ -70,6 +70,14 @@ public class DetailActivity extends AppCompatActivity {
         detailTitle.setText(title != null ? title : "Untitled");
         detailDesc.setText(desc != null ? desc : "-");
         detailAI.setVisibility(aiGenerated ? View.VISIBLE : View.GONE);
+
+        ImageView detailProfileImage = findViewById(R.id.detailProfileImage);
+
+        detailProfileImage.setOnClickListener(v -> {
+            Intent intent = new Intent(DetailActivity.this, OtherProfileActivity.class);
+            intent.putExtra("uid", uploaderUid);
+            startActivity(intent);
+        });
 
         if (uploaderUid != null) {
             DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference("users");
