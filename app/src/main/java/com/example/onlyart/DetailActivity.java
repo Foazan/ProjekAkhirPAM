@@ -65,6 +65,9 @@ public class DetailActivity extends AppCompatActivity {
 
         Glide.with(this).load(imageUrl).into(detailImage);
         detailTags.setText(tags != null ? tags : "-");
+        TextView detailTitle = findViewById(R.id.detailTitle);
+        String title = getIntent().getStringExtra("title");
+        detailTitle.setText(title != null ? title : "Untitled");
         detailDesc.setText(desc != null ? desc : "-");
         detailAI.setVisibility(aiGenerated ? View.VISIBLE : View.GONE);
 

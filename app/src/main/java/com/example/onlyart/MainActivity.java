@@ -6,8 +6,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.google.firebase.database.*;
 
@@ -27,7 +27,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
 
         adapter = new WorkAdapter(workList);
         recyclerView.setAdapter(adapter);
@@ -60,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupBottomNavigation() {
         findViewById(R.id.nav_home).setOnClickListener(v -> {
-
         });
 
         findViewById(R.id.nav_add).setOnClickListener(v -> {

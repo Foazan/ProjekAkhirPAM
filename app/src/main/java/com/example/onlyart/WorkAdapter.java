@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 
 public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder> {
 
@@ -31,6 +32,8 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
 
         Glide.with(holder.itemView.getContext())
                 .load(work.getImageUrl())
+                .fitCenter()
+                .override(Target.SIZE_ORIGINAL)
                 .into(holder.imageView);
 
         holder.itemView.setOnClickListener(view -> {
@@ -38,6 +41,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.WorkViewHolder
             intent.putExtra("imageUrl", work.getImageUrl());
             intent.putExtra("uploaderUid", work.getUid());
             intent.putExtra("tags", work.getTags());
+            intent.putExtra("title", work.getTitle());
             intent.putExtra("desc", work.getDesc());
             intent.putExtra("ai_generated", work.getAiGenerated());
             intent.putExtra("key", work.getKey());
